@@ -1,0 +1,4 @@
+{
+    "HTTPPort" : 80, // sets the port the website is on
+    "WebSocketPort" : 443 // sets the port of the websocket
+}
