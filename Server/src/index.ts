@@ -1,7 +1,14 @@
 import { readFileSync} from "fs"
 import { removeComments } from "./functions.js"
 import * as webSocket from "ws"
+import { connection } from "./ws.js"
 
+// Counter
+export let count : number = 0
+
+export function addToCount(){
+    count += 1
+}
 
 // Read in the settings
 var rawData = readFileSync("settings.json", "utf8")
