@@ -23,3 +23,6 @@ export const settings: {
 export const wss: webSocket.WebSocketServer = new webSocket.WebSocketServer({ port: settings.WebSocketPort })
 
 wss.on("connection", connection)
+wss.on("listening", ()=>{console.log("Web Socket Server is open")})
+
+// Express server
