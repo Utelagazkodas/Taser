@@ -34,4 +34,7 @@ function sendFile( path : string, req : express.Request, res : express.Response,
         }
     })
     }
+    else {
+        sendFile("/", req, res, true)
+    }
 }

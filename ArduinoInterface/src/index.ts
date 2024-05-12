@@ -1,6 +1,6 @@
 import { SerialPort } from 'serialport';
 
-var stdin = process.stdin;
+/* var stdin = process.stdin;
 // without this, we would only get streams once enter is pressed
 stdin.setRawMode( true );
 
@@ -19,12 +19,17 @@ stdin.on( 'data', (key) => {
     else {
         process.exit()
     }
-});
+}); */
 
 
 
-const path = '/dev/ttyUSB0';
+const path = '/dev/ttyUSB1';
+const server = "ws://localhost:443"
+
 const serialPort = new SerialPort({ path: path, baudRate: 9600 });
+const webSocket = new WebSocket(server)
+
+webSocket.addEventListener("message", ()=>{turnOn()})
 
 serialPort.on('open', () => {
     console.log('Serial port opened');
