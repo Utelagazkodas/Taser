@@ -1,12 +1,13 @@
 import { existsSync, readFile } from "fs";
-import express from "express"
+import * as express from "express"
 import * as fs from "fs"
 
 const loaded = {}
 
-
 // reads and returns a file
 function sendFile( path : string, req : express.Request, res : express.Response, stayLoaded : boolean = true ){
+
+    console.log(path)
 
     //checks if the path they are trying to send has already been loaded
     if(loaded[path] && stayLoaded){
@@ -14,8 +15,17 @@ function sendFile( path : string, req : express.Request, res : express.Response,
         res.end()
         return 
     }
+    if(req.url == "/favicon.ico"){
+        res.end()
+        return
+    }
 
-    if(existsSync(path)){
+    console.log(req.url.slice(req.url.length - 3))
+
+    if(req.url.slice(req.url.length - 3) == ".js"){
+        res.setHeader('Content-Type', 'application/javascript'); 
+    }
+    
 
     // reads and sends a file
     fs.readFile(path, (err, data) =>{
@@ -29,12 +39,14 @@ function sendFile( path : string, req : express.Request, res : express.Response,
         }
 
         else{
-           
+            sendFile("Frontend/docs/index.html", req, res, true)
             return
         }
     })
-    }
-    else {
-        sendFile("/", req, res, true)
-    }
+    
+}
+
+export function get(req : express.Request, res : express.Response){
+
+    sendFile("Frontend/docs" + req.url, req, res, true)
 }

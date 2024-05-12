@@ -2,6 +2,8 @@ import { readFileSync} from "fs"
 import { removeComments } from "./functions.js"
 import * as webSocket from "ws"
 import { connection } from "./ws.js"
+import * as express from "express"
+import { get } from "./express.js"
 
 // Counter
 export let count : number = 0
@@ -26,3 +28,7 @@ wss.on("connection", connection)
 wss.on("listening", ()=>{console.log("Web Socket Server is open")})
 
 // Express server
+export const app : express.Express = express.default()
+
+app.get("*", get)
+app.listen(settings.HTTPPort, ()=>{console.log("Started express")})

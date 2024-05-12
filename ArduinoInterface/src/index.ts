@@ -25,7 +25,7 @@ stdin.on( 'data', (key) => {
 
 
 const path = '/dev/ttyUSB1'
-const server = "ws://localhost:443"
+const server = "ws://3.79.166.32:443"
 
 const serialPort = new SerialPort({ path: path, baudRate: 9600 });
 const webSocket = new WebSocket(server)
