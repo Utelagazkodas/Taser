@@ -37,10 +37,6 @@ serialPort.on('error', (err) => {
 
 
 
-
-
-
-
 function turnOn() {
     
     if (serialPort.isOpen) {
