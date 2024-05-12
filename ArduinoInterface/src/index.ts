@@ -1,4 +1,5 @@
 import { SerialPort } from 'serialport';
+import { WebSocket } from 'ws';
 
 /* var stdin = process.stdin;
 // without this, we would only get streams once enter is pressed
@@ -23,13 +24,14 @@ stdin.on( 'data', (key) => {
 
 
 
-const path = '/dev/ttyUSB1';
+const path = '/dev/ttyUSB1'
 const server = "ws://localhost:443"
 
 const serialPort = new SerialPort({ path: path, baudRate: 9600 });
 const webSocket = new WebSocket(server)
 
 webSocket.addEventListener("message", ()=>{turnOn()})
+webSocket.addEventListener("open", ()=>{console.log("opened websocket")})
 
 serialPort.on('open', () => {
     console.log('Serial port opened');
