@@ -6,6 +6,9 @@ const loaded = {}
 
 // reads and returns a file
 function sendFile( path : string, req : express.Request, res : express.Response, stayLoaded : boolean = true ){
+    if(req.url.slice(req.url.length - 3) == ".js"){
+        res.setHeader('Content-Type', 'application/javascript'); 
+    }
 
     console.log(path)
 
@@ -20,11 +23,7 @@ function sendFile( path : string, req : express.Request, res : express.Response,
         return
     }
 
-    console.log(req.url.slice(req.url.length - 3))
 
-    if(req.url.slice(req.url.length - 3) == ".js"){
-        res.setHeader('Content-Type', 'application/javascript'); 
-    }
     
 
     // reads and sends a file
